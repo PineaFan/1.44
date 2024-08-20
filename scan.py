@@ -95,6 +95,7 @@ if destructive:
                     time.sleep(0.1)
             # Then delete it
             os.remove(os.path.join(root, new_name.lower()))
+            size -= file_size
         # If the size exceeds 1.44MB, corrupt the file and all subsequent files
         if size > 1440 * 1024:
             print(f'\n{colours["red"]}Warning: The folder size is larger than 1.44MB.\033[0m')
@@ -105,7 +106,10 @@ if destructive:
                     time.sleep(0.1)
             os.remove(os.path.join(root, new_name.lower()))
             print(f"{colours['red']}File {new_name} deleted (corrupted).\033[0m")
+            size -= file_size
         time.sleep(0.1)
+
+size = 0
 
 for root, dirs, files in os.walk(folder):
     files_this_dir = []
